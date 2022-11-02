@@ -1,0 +1,28 @@
+@font-face {
+    font-family: sahel;
+    src: url(../Farsi/TTF/Sahel.ttf);
+}
+body{
+    font-family: sahel;
+}
+
+
+/* input[type="file"]{
+    visibility: hidden;
+    position: absolute;
+} */
+
+#email.active{
+    border: 1px solid green;
+}
+#email.invalid{
+    border: 1px solid red;
+}
+
+#password.active{
+    border: 1px solid green;
+}
+
+#password.invalid{
+    border: 1px solid red;
+}

@@ -1,0 +1,112 @@
+{% extends 'base/base.html'%} 
+{% block title %}Login{% endblock title %}
+{%block content %}
+
+<section class=" bg-success">
+    <div class="container">
+
+        
+        <div class="row px-sm-2" style="height:100vh ;">
+            <div class="col-md-6 col-lg-6 m-auto p-5 shadow bg-white">
+                {%for message in messages%}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                    <strong>هشدار: </strong>{{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                
+                {% endfor %}
+                <h1 class=" mt-3 mb-4 pr-3" style="border-right:10px solid green">ثبت نام</h1>
+                <form action="{% url 'signup' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="from-group my-3 ">
+                                <input type="text" class=" form-control" placeholder="نام" name="fist_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="from-group my-3">
+                                <input type="text" class=" form-control" placeholder="نام دوم" name="last_name">
+                            </div>
+                        </div>
+                    </div>
+                
+                        <div class="from-group my-3">
+                            <input type="text" class=" form-control" placeholder="تخلص" name="username">
+                        </div>
+                    <div class="from-group my-3">
+                        <input type="email" id="email" class=" form-control" placeholder="ایمیل آدرس" name="email">
+                    </div>
+                    <div class="from-group my-3">
+                        <input type="password" id="password" class=" form-control" placeholder=" گذرواژه" name="password1">
+                        <p class="text-muted p-1" style="font-size:10px ;">گذرواژه متشکل از حروف بزرگ گوچک و عدد باشد</p>
+                    </div>
+                    <div class="from-group my-3">
+                        <input type="password" id="passconfig" name="password2" class=" form-control" placeholder=" تایید گذرواژه">
+                        <p class="p  mt-2""></p>
+                    </div>
+                    <div class=" from-group my-3">
+                            <input type="submit" class=" form-control btn btn-success" name="submit" value="ثبت">
+                    </div>
+                </form>
+                <a href="{% url 'login' %}" class=" alert-link">ورود به حساب</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    // email validation
+    let patern = /[a-z]+[0-9]*[@]{1}[a-z]+[.]{1}[a-z]{3}/;
+    let Email = document.getElementById('email')
+    Email.oninput = () => {
+        if (Email.value == patern.exec(Email.value)) {
+            Email.classList.add('active');
+            Email.classList.remove('invalid');
+        } else {
+            Email.classList.add('invalid');
+            Email.classList.remove('active');
+
+        }
+    }
+    // password Validation
+    let passPat = /[A-Z]+[a-z]+[0-9]/;
+    let password = document.getElementById('password')
+    password.oninput = () => {
+        if (password.value == passPat.exec(password.value)) {
+            password.classList.add('active');
+            password.classList.remove('invalid');
+            console.log(password.value)
+        } else {
+            password.classList.add('invalid');
+            password.classList.remove('active');
+            console.log(password.value)
+
+        }
+    }
+
+
+    // check passwords
+    let passconfig = document.getElementById('passconfig')
+    passconfig.oninput = () => {
+        let msg = document.querySelector('.p')
+        if (password.value === passconfig.value) {
+            console.log(msg)
+            msg.innerText = 'گذرواژه درست است'
+            msg.style.color = 'green'
+        } else {
+            msg.innerText = 'گذرواژه درست نیست'
+            msg.style.color = 'red'
+        }
+    }
+</script>
+
+
+
+
+
+{% endblock %}
